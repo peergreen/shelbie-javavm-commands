@@ -59,7 +59,7 @@ public class DeadLocksAction extends AbstractThreadAction {
         }
 
         // Found a deadlock
-        buffer.render("@|bold,red %d Threads|@ are involved in a deadlock situation:", ids.length);
+        buffer.render("@|bold,red %d Threads|@ are involved in a deadlock situation: ", ids.length);
         for (int i = 0 ; i < ids.length; i++) {
             if (i != 0) {
                 buffer.a(", ");
