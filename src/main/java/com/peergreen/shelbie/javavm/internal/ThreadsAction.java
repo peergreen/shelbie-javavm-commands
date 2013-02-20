@@ -15,25 +15,34 @@
 
 package com.peergreen.shelbie.javavm.internal;
 
+import static com.peergreen.shelbie.javavm.internal.util.Threads.getRootThreadGroup;
+
+import com.peergreen.shelbie.javavm.internal.node.ThreadGroupNodeAdapter;
+import com.peergreen.shelbie.javavm.internal.node.ThreadsPrettyPrintVisitor;
+import com.peergreen.shelbie.javavm.internal.util.Threads;
+import com.peergreen.tree.node.LazyNode;
+import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.HandlerDeclaration;
 import org.apache.felix.service.command.CommandSession;
 
 /**
- * Dump the threads.
+ * Display the hierarchy of Threads and ThreadGroup containers.
+ * @author Guillaume Sauthier
  */
 @Component
-@Command(name = "thread-dump",
+@Command(name = "threads",
          scope = "javavm",
-         description = "List Thread(s) and their stack traces.")
+         description = "Display the hierarchy of Threads and ThreadGroup containers.")
 @HandlerDeclaration("<sh:command xmlns:sh='org.ow2.shelbie'/>")
-public class ThreadDumpAction extends AbstractThreadAction {
+public class ThreadsAction implements Action {
 
     public Object execute(final CommandSession session) throws Exception {
 
-        session.execute("javavm:thread-list");
-        session.execute("javavm:dead-locks");
+        // Build the initial Node and traverse it
+        LazyNode<Object> node = new LazyNode<Object>(new ThreadGroupNodeAdapter(), getRootThreadGroup());
+        node.walk(new ThreadsPrettyPrintVisitor(System.out));
 
         return null;
     }

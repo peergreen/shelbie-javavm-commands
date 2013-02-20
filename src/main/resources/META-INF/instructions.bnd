@@ -13,6 +13,5 @@
 # limitations under the License.
 #
 
-Private-Package com.peergreen.tree, \
-                com.peergreen.tree.node, \
-                com.peergreen.shelbie.javavm.internal.*
+# Internal libraries
+Embed-Dependency peergreen-tree;inline=true
