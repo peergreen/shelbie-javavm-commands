@@ -19,7 +19,9 @@
                            org.ow2.shelbie http://shelbie.ow2.org/xmlns/2.0.0/shell-command.xsd">
 
   <command-instance xmlns="org.ow2.shelbie"
-                    action="com.peergreen.shelbie.javavm.internal.ThreadListAction" />
+                    action="com.peergreen.shelbie.javavm.internal.ThreadListAction">
+    <completer component="com.peergreen.shelbie.javavm.internal.completer.ThreadNameCompleter" />
+  </command-instance>
   <command-instance xmlns="org.ow2.shelbie"
                     action="com.peergreen.shelbie.javavm.internal.ThreadsAction" />
   <command-instance xmlns="org.ow2.shelbie"
