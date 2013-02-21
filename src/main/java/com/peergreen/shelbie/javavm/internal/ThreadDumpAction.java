@@ -15,6 +15,9 @@
 
 package com.peergreen.shelbie.javavm.internal;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.HandlerDeclaration;
@@ -32,8 +35,15 @@ public class ThreadDumpAction extends AbstractThreadAction {
 
     public Object execute(final CommandSession session) throws Exception {
 
+        session.getConsole().println("=========================================================");
+        Calendar calendar = GregorianCalendar.getInstance();
+        session.getConsole().printf("Report generated the %tc%n", calendar);
+        session.getConsole().println("=========================================================\n");
         session.execute("javavm:thread-list");
+        session.getConsole().println("=========================================================\n");
         session.execute("javavm:dead-locks");
+        session.getConsole().println("=========================================================\n");
+        session.execute("javavm:memory");
 
         return null;
     }
