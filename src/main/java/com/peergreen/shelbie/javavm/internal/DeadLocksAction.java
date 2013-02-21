@@ -23,17 +23,13 @@ import java.lang.management.MonitorInfo;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 
-import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.HandlerDeclaration;
 import org.apache.felix.service.command.CommandSession;
 import org.fusesource.jansi.Ansi;
 
-import com.peergreen.shelbie.javavm.internal.node.ThreadGroupNodeAdapter;
-import com.peergreen.shelbie.javavm.internal.node.ThreadsPrettyPrintVisitor;
 import com.peergreen.shelbie.javavm.internal.util.Threads;
-import com.peergreen.tree.node.LazyNode;
 
 /**
  * Display deadlocks information (if any).

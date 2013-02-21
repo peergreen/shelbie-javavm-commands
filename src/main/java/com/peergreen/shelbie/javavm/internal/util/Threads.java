@@ -15,8 +15,6 @@
 
 package com.peergreen.shelbie.javavm.internal.util;
 
-import static java.lang.String.format;
-
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.util.Arrays;

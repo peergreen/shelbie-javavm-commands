@@ -15,17 +15,17 @@
 
 package com.peergreen.shelbie.javavm.internal;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+import java.util.regex.Pattern;
+
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.HandlerDeclaration;
 import org.apache.felix.service.command.CommandSession;
 import org.fusesource.jansi.Ansi;
-
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
-import java.util.regex.Pattern;
 
 /**
  * List the threads.

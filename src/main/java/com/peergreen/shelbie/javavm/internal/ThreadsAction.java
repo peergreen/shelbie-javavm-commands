@@ -17,15 +17,15 @@ package com.peergreen.shelbie.javavm.internal;
 
 import static com.peergreen.shelbie.javavm.internal.util.Threads.getRootThreadGroup;
 
-import com.peergreen.shelbie.javavm.internal.node.ThreadGroupNodeAdapter;
-import com.peergreen.shelbie.javavm.internal.node.ThreadsPrettyPrintVisitor;
-import com.peergreen.shelbie.javavm.internal.util.Threads;
-import com.peergreen.tree.node.LazyNode;
 import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.HandlerDeclaration;
 import org.apache.felix.service.command.CommandSession;
+
+import com.peergreen.shelbie.javavm.internal.node.ThreadGroupNodeAdapter;
+import com.peergreen.shelbie.javavm.internal.node.ThreadsPrettyPrintVisitor;
+import com.peergreen.tree.node.LazyNode;
 
 /**
  * Display the hierarchy of Threads and ThreadGroup containers.

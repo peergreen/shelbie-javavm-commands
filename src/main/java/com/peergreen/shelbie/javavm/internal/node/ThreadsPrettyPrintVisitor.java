@@ -22,8 +22,8 @@ import java.io.PrintStream;
 
 import org.fusesource.jansi.Ansi;
 
-import com.peergreen.tree.visitor.print.TreePrettyPrintNodeVisitor;
 import com.peergreen.tree.Node;
+import com.peergreen.tree.visitor.print.TreePrettyPrintNodeVisitor;
 
 /**
  * User: guillaume
