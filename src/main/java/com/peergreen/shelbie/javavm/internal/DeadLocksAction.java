@@ -42,6 +42,7 @@ import com.peergreen.shelbie.javavm.internal.util.Threads;
 @HandlerDeclaration("<sh:command xmlns:sh='org.ow2.shelbie'/>")
 public class DeadLocksAction extends AbstractThreadAction {
 
+    @Override
     public Object execute(final CommandSession session) throws Exception {
 
         Ansi buffer = Ansi.ansi();
@@ -50,7 +51,7 @@ public class DeadLocksAction extends AbstractThreadAction {
         long[] ids = mbean.findDeadlockedThreads();
 
         if (ids == null) {
-            System.out.printf("No deadlocks found.");
+            System.out.println("No deadlocks found.");
             return null;
         }
 
