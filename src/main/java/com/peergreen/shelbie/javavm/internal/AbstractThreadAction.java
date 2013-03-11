@@ -36,7 +36,7 @@ public abstract class AbstractThreadAction implements Action {
 
         LockInfo[] lockedSynchronizers = threadInfo.getLockedSynchronizers();
         for (LockInfo lockedSynchronizer : lockedSynchronizers) {
-            buffer.render("  Owned synchronizer <@|%#016xd|@> (a %s)", lockedSynchronizer.getIdentityHashCode(), lockedSynchronizer.getClassName());
+            buffer.render("  Owned synchronizer <@|bold %#016xd|@> (a %s)", lockedSynchronizer.getIdentityHashCode(), lockedSynchronizer.getClassName());
             buffer.newline();
         }
 
