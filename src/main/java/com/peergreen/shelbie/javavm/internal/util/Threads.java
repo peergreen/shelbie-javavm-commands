@@ -71,4 +71,14 @@ public class Threads {
         // System thread, not visible using Thread API
         return null;
     }
+
+    public static Thread getThread(String name) {
+        for (Thread thread : getAllThreads()) {
+            if (name.equals(thread.getName())) {
+                return thread;
+            }
+        }
+        // System thread, not visible using Thread API
+        return null;
+    }
 }

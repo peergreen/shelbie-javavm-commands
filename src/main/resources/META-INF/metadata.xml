@@ -23,6 +23,10 @@
     <completer component="com.peergreen.shelbie.javavm.internal.completer.ThreadNameCompleter" />
   </command-instance>
   <command-instance xmlns="org.ow2.shelbie"
+                    action="com.peergreen.shelbie.javavm.internal.KillThreadAction">
+    <completer component="com.peergreen.shelbie.javavm.internal.completer.ThreadNameCompleter" />
+  </command-instance>
+  <command-instance xmlns="org.ow2.shelbie"
                     action="com.peergreen.shelbie.javavm.internal.ThreadsAction" />
   <command-instance xmlns="org.ow2.shelbie"
                     action="com.peergreen.shelbie.javavm.internal.DeadLocksAction" />
