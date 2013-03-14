@@ -68,10 +68,6 @@ public class KillThreadAction implements Action {
                 action = "stopped";
             }
 
-            // Give the thread some time to quit
-            // TODO Maybe this is not really required, not sure ...
-            Thread.sleep(50);
-
             Ansi buffer = Ansi.ansi();
             if (!thread.isAlive()) {
                 // Successful termination
