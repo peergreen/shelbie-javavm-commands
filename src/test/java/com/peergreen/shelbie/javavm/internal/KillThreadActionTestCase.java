@@ -31,7 +31,7 @@ public class KillThreadActionTestCase {
     @Test
     public void testStopThread() throws Exception {
 
-        Thread killable = new Thread("Killable") {
+        Thread killable = new Thread("JavaVM Test : Stop") {
             @Override
             public void run() {
                 try {
@@ -44,11 +44,11 @@ public class KillThreadActionTestCase {
         killable.start();
 
         ActionContainer container = new ActionContainer(new KillThreadAction());
-        container.argument(0, "Killable");
+        container.argument(0, "JavaVM Test : Stop");
         container.execute(null);
 
         assertEquals(killable.getState(), Thread.State.TERMINATED);
-        assertEquals(container.getSystemOut(false), "[SUCCESS] Thread \"Killable\" has been stopped\n");
+        assertEquals(container.getSystemOut(false), "[SUCCESS] Thread \"JavaVM Test : Stop\" has been stopped\n");
         assertFalse(killable.isAlive());
     }
 
@@ -57,7 +57,7 @@ public class KillThreadActionTestCase {
 
         final Holder<Boolean> interrupted = new Holder<Boolean>(Boolean.FALSE);
         final Holder<Boolean> softExit = new Holder<Boolean>(Boolean.FALSE);
-        Thread killable = new Thread("Killable") {
+        Thread killable = new Thread("JavaVM Test : Interruption") {
             @Override
             public void run() {
                 try {
@@ -73,7 +73,7 @@ public class KillThreadActionTestCase {
 
         ActionContainer container = new ActionContainer(new KillThreadAction());
         container.option("--interrupt", Boolean.TRUE);
-        container.argument(0, "Killable");
+        container.argument(0, "JavaVM Test : Interruption");
         container.execute(null);
 
         killable.join();
@@ -82,23 +82,23 @@ public class KillThreadActionTestCase {
         assertEquals(killable.getState(), Thread.State.TERMINATED);
         assertTrue(interrupted.value);
         assertTrue(softExit.value);
-        assertEquals(container.getSystemOut(false), "[SUCCESS] Thread \"Killable\" has been interrupted\n");
+        assertEquals(container.getSystemOut(false), "[SUCCESS] Thread \"JavaVM Test : Interruption\" has been interrupted\n");
     }
 
     @Test
     public void testNotInterruptibleThread() throws Exception {
 
-        ControllableThread killable = new ControllableThread("Killable");
+        ControllableThread killable = new ControllableThread("JavaVM Test : Interruption KO");
         killable.start();
 
         ActionContainer container = new ActionContainer(new KillThreadAction());
         container.option("--interrupt", Boolean.TRUE);
-        container.argument(0, "Killable");
+        container.argument(0, "JavaVM Test : Interruption KO");
         container.execute(null);
 
         // Cannot use Thread.isInterrupted() since an interrupted sleep reset the flag
         assertTrue(killable.interrupted);
-        assertEquals(container.getSystemOut(false), "[FAILURE] Thread \"Killable\" could not be interrupted\n");
+        assertEquals(container.getSystemOut(false), "[FAILURE] Thread \"JavaVM Test : Interruption KO\" could not be interrupted\n");
         assertEquals(killable.getState(), Thread.State.TIMED_WAITING);
 
         // Clean up the thread
