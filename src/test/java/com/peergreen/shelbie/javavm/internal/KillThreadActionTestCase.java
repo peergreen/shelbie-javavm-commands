@@ -48,6 +48,7 @@ public class KillThreadActionTestCase {
         container.execute(null);
 
         assertEquals(killable.getState(), Thread.State.TERMINATED);
+        assertEquals(container.getSystemOut(false), "[SUCCESS] Thread \"Killable\" has been stopped\n");
         assertFalse(killable.isAlive());
     }
 
@@ -75,10 +76,33 @@ public class KillThreadActionTestCase {
         container.argument(0, "Killable");
         container.execute(null);
 
+        killable.join();
+
         // Cannot use Thread.isInterrupted() since an interrupted sleep reset the flag
+        assertEquals(killable.getState(), Thread.State.TERMINATED);
         assertTrue(interrupted.value);
         assertTrue(softExit.value);
-        assertEquals(killable.getState(), Thread.State.TERMINATED);
+        assertEquals(container.getSystemOut(false), "[SUCCESS] Thread \"Killable\" has been interrupted\n");
+    }
+
+    @Test
+    public void testNotInterruptibleThread() throws Exception {
+
+        ControllableThread killable = new ControllableThread("Killable");
+        killable.start();
+
+        ActionContainer container = new ActionContainer(new KillThreadAction());
+        container.option("--interrupt", Boolean.TRUE);
+        container.argument(0, "Killable");
+        container.execute(null);
+
+        // Cannot use Thread.isInterrupted() since an interrupted sleep reset the flag
+        assertTrue(killable.interrupted);
+        assertEquals(container.getSystemOut(false), "[FAILURE] Thread \"Killable\" could not be interrupted\n");
+        assertEquals(killable.getState(), Thread.State.TIMED_WAITING);
+
+        // Clean up the thread
+        killable.run = false;
     }
 
     private static class Holder<T> {
@@ -86,6 +110,30 @@ public class KillThreadActionTestCase {
 
         private Holder(T value) {
             this.value = value;
+        }
+    }
+
+    private static class ControllableThread extends Thread {
+
+        boolean run = true;
+        boolean interrupted = false;
+
+        public ControllableThread(String name) {
+            super(name);
+        }
+
+        @Override
+        public void run() {
+
+            while (run) {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    // Swallow interrupted exception to simulate non-interrupting thread
+                    // Will effectively exit the Thread when 'run' will be set to 'false'
+                    interrupted = true;
+                }
+            }
         }
     }
 }

@@ -68,6 +68,10 @@ public class KillThreadAction implements Action {
                 action = "stopped";
             }
 
+            // Wait period
+            // As we stop another Thread, we cannot guarantee that the interruption/stop is immediate
+            Thread.sleep(10);
+
             Ansi buffer = Ansi.ansi();
             if (!thread.isAlive()) {
                 // Successful termination
