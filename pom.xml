@@ -42,7 +42,7 @@
     <dependency>
       <groupId>com.peergreen.tree</groupId>
       <artifactId>peergreen-tree</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
 
     <dependency>
